@@ -1,18 +1,26 @@
 version: '3'
-services:
-  azure-vote-back:
-    image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
-    container_name: azure-vote-back
-    environment:
-      ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-        - "6379:6379"
 
-  azure-vote-front:
-    build: ./azure-vote
-    image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
-    container_name: azure-vote-front
-    environment:
-      REDIS: azure-vote-back
+services:
+  web:
+    build: 
+      context: ./azure-vote/azure-vote
+      dockerfile: Dockerfile.prod    #command: gunicorn --bind 0.0.0.0:5000 manage:app
     ports:
-        - "8080:80"
+      - 8000:8000
+    env_file:
+      - ./azure-vote/azure-vote/.env
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+  nginx:
+    build: ./azure-vote/nginx
+    environment:
+      - SERVER_PORT=8000
+      - SERVER_NAME=web
+    ports:
+      - 1337:80
+    depends_on:
+     - web

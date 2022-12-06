@@ -7,7 +7,7 @@ metadata:
   name: voting-app
 spec:
   containers:
-  - image: 087380303747.dkr.ecr.eu-west-2.amazonaws.com/voting-app:a8c66d57d964327d3361656cce7e4a934094db79
+  - image: 087380303747.dkr.ecr.eu-west-2.amazonaws.com/voting-app:72fa78ed94bf60e388eb121c5b30be923f01ddbe
     name: voting-app
     env:
       - name: REDIS
