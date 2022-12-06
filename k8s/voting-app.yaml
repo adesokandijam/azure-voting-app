@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: voting-app
+  name: voting-app
+spec:
+  containers:
+  - image: 087380303747.dkr.ecr.eu-west-2.amazonaws.com/voting-app:a8c66d57d964327d3361656cce7e4a934094db79
+    name: voting-app
+    env:
+      - name: REDIS
+        value: redis-svc
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
