@@ -2,14 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: redis
-  name: redis-svc
+    run: nginx
+  name: nginx
 spec:
   ports:
-  - port: 6379
+  - port: 80
     protocol: TCP
-    targetPort: 6379
+    targetPort: 80
+    nodePort: 30002
   selector:
-    run: redis
+    run: nginx
+  type: NodePort
 status:
   loadBalancer: {}
