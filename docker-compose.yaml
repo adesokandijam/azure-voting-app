@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web:
+  voting-svc:
     build: 
       context: ./azure-vote/azure-vote
       dockerfile: Dockerfile.prod    #command: gunicorn --bind 0.0.0.0:5000 manage:app
@@ -23,4 +23,4 @@ services:
     ports:
       - 1337:80
     depends_on:
-     - web
+     - voting-svc
